@@ -1,19 +1,19 @@
-FROM node:20
+FROM node:20-slim
 
 WORKDIR /app
 
-# Install dependencies
+# 1. Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the code
+# 2. Copy the rest of your source code (including server.ts)
 COPY . .
 
-# Build the project (if needed, since you have vite/typescript)
+# 3. CRITICAL: Build the TypeScript code into JavaScript
 RUN npm run build
 
-# Expose the port your server uses (check server.ts, but 8080 is common)
-EXPOSE 8080
+# 4. Expose the port your app uses
+EXPOSE 3000
 
-# Run the server
+# 5. Run the compiled file from the dist folder
 CMD ["node", "dist/server.js"]
