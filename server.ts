@@ -17,9 +17,9 @@ const notificationsDB: any[] = [];
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = '0.0.0.0';
 
-  app.use(express.json());
+  app.use(express.json());  
 
   // ============================================================================
   // API GATEWAY & MICROSERVICES SIMULATION
