@@ -1,0 +1,5 @@
+{
+  "name": "VRS Dairy Farm",
+  "description": "Dairy product selling website with a simulated microservices architecture.",
+  "requestFramePermissions": []
+}
