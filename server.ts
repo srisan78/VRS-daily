@@ -17,7 +17,7 @@ const notificationsDB: any[] = [];
 
 async function startServer() {
   const app = express();
-  const PORT = '0.0.0.0';
+  const PORT = 3000;
 
   app.use(express.json());  
 
