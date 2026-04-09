@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    environment {
+        REGISTRY = 'docker.io'
+        IMAGE_NAME = 'sridhar76/vrs_daily'
+        DOCKER_USERNAME = credentials('sridhar76')
+        DOCKER_PASSWORD = credentials('Docker_hub')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/srisan78/VRS-daily.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'pytest'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t $sridhar76/vrs_daily:$BUILD_NUMBER .'
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                sh 'docker push $sridhar76/vrs_daily:$BUILD_NUMBER'
+            }
+        }
+    }
+}
