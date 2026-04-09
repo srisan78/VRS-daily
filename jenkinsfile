@@ -4,15 +4,14 @@ pipeline {
     environment {
         REGISTRY = 'docker.io'
         IMAGE_NAME = 'sridhar76/vrs_daily'
-        DOCKER_USERNAME = credentials('sridhar76')
-        DOCKER_PASSWORD = credentials('Docker_hub')
+        DOCKER_HUB_VARS = credentials('docker-hub-creds')
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/srisan78/VRS-daily.git'
+                git branch: 'main', url: 'https://github.com/srisan78/VRS-daily.git'
             }
         }
 
